@@ -6,7 +6,18 @@ using System.Threading.Tasks;
 
 namespace UpwordsAIviaConsole.AI
 {
-    class AIHelpers
+    public static class AIHelpers
     {
+
+
+
+
+
+
+
+
+
+
+
     }
 }
