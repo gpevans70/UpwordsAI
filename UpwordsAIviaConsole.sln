@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpwordsAIviaConsole", "UpwordsAIviaConsole\UpwordsAIviaConsole.csproj", "{0A1B574C-0478-470C-97C4-53C5D03F9A3E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpwordsAI", "UpwordsAI\UpwordsAI.csproj", "{23AB3993-36D6-438A-90B1-6DB424A372B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpwordsAI.Tests", "UpwordsAI.Tests\UpwordsAI.Tests.csproj", "{F230DD38-D00D-4826-801C-4C638A6E366E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{0A1B574C-0478-470C-97C4-53C5D03F9A3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A1B574C-0478-470C-97C4-53C5D03F9A3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A1B574C-0478-470C-97C4-53C5D03F9A3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23AB3993-36D6-438A-90B1-6DB424A372B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23AB3993-36D6-438A-90B1-6DB424A372B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23AB3993-36D6-438A-90B1-6DB424A372B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23AB3993-36D6-438A-90B1-6DB424A372B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F230DD38-D00D-4826-801C-4C638A6E366E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F230DD38-D00D-4826-801C-4C638A6E366E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F230DD38-D00D-4826-801C-4C638A6E366E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F230DD38-D00D-4826-801C-4C638A6E366E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
