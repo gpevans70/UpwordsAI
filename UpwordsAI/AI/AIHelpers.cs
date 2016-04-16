@@ -27,10 +27,10 @@ namespace UpwordsAI.AI
             foreach (Pattern p in patterns)
             {
                 // p.Score is the score for the existing tiles with no letters added
-                if (patternCount > 0) maxScore += p.Score;
+                if (patternCount >= 1) maxScore += p.Score;
 
                 // Track the lowest score of the '+' intersecting words
-                if (patternCount > 1 && patterns[1].Letters.ElementAt(patternCount-1) == '+') minScore = Math.Min( p.Score, minScore);
+                if (patternCount >= 2 && patterns[1].Letters.ElementAt(patternCount-2) == '+') minScore = Math.Min( p.Score, minScore);
 
                 patternCount++;
             }          
