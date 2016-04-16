@@ -51,7 +51,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AI\AIHelpersTest.cs" />
+    <Compile Include="AI\AIWorkerTest.cs" />
     <Compile Include="AI\PatternTest.cs" />
+    <Compile Include="Dictionary\DictionaryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

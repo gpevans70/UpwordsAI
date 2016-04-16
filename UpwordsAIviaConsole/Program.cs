@@ -13,10 +13,13 @@ namespace UpwordsAIviaConsole
     {
         static void Main(string[] args)
         {
-            AIworker TheAI = new AIworker();
+            AIWorker TheAIWorker = new AIWorker();
 
+            string boardRack;
             string[,] boardTiles = new string[10, 10];
             int[,] boardHeights = new int[10, 10];
+            
+            boardRack = args[0].Trim().Replace("Qu","Q").ToUpper();            
 
             string[] fileContents = File.ReadAllLines("C:/Users/Public/Documents/board.txt");
 
@@ -109,14 +112,42 @@ namespace UpwordsAIviaConsole
 
             if (errorString == "")
             {
-                Console.WriteLine($"My tiles are: {args[0]}");
+                Console.WriteLine($"My tiles are: {boardRack}");
                 Console.WriteLine("");
                 Console.WriteLine("Press X followed by ENTER key to eXit or the ENTER key to start the AI");
                 string UserInput = Console.ReadLine();
 
                 if (UserInput != "X")
                 {
-                    TheAI.DoStuff();
+                    string Move = TheAIWorker.FindMove(boardRack, boardTiles, boardHeights); // These are zero based arrays
+
+                    Console.WriteLine("");
+                    Console.WriteLine(""); Console.WriteLine($"I play tiles {Move}");
+                    Console.WriteLine("");
+                    Console.WriteLine("  +------+------+------+------+------+------+------+------+------+------+");
+
+                    for (int i = 0; i < 10; i++)
+                    {
+                        Console.Write("  ");
+
+                        for (int j = 0; j < 10; j++)
+                        {
+                            if (boardTiles[i, j] == "Q")
+                            {
+                                Console.Write("|  Qu");
+                            }
+                            else
+                            {
+                                Console.Write($"|  {boardTiles[i, j]} ");
+                            }
+                            Console.Write("  ");
+                        }
+                        Console.Write("|");
+                        Console.WriteLine("");
+                        Console.WriteLine("  +------+------+------+------+------+------+------+------+------+------+");
+                    }
+                    Console.WriteLine("");
+
                     Console.WriteLine("Press the ENTER key to exit");
                     Console.ReadLine();
                 }

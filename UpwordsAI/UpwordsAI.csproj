@@ -43,6 +43,8 @@
     <Compile Include="AI\AIHelpers.cs" />
     <Compile Include="AI\AIworker.cs" />
     <Compile Include="AI\Pattern.cs" />
+    <Compile Include="AI\PatternHolder.cs" />
+    <Compile Include="Dictionary\Dictionary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
