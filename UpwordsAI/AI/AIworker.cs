@@ -98,30 +98,30 @@ namespace UpwordsAI.AI
 
                 if (p.MaxScore < bestPatternScore - thresholdAdjustment)
                 {
-                    Debug.Print($"  ** Pattern eliminated {p.ThePattern[0].Letters}. Max score is {p.MaxScore} and criterion is {bestPatternScore - thresholdAdjustment}");
+                    //Debug.Print($"  ** Pattern eliminated {p.ThePattern[0].Letters}. Max score is {p.MaxScore} and criterion is {bestPatternScore - thresholdAdjustment}");
                 }
 
                 else
                 {
                     string regexLookup = AIHelpers.GenerateLookup(p.ThePattern,Rack);
-                    Debug.Print("Lookup..." + regexLookup);
+//Console.WriteLine("Lookup..." + regexLookup);
                                     //String dictionary = "FADE FACE BAG CAG CAD BAD PARE PARC AD BAGFADE BAGFACE BATED RATED GATED BATEE EPARE CARE AR PA PE TAR";
                     string dictionary = TheDictionary.wordList;
 
                     MatchCollection mm = Regex.Matches(dictionary, regexLookup);
                     if (mm.Count == 0)
                     {
-                        Debug.WriteLine("  No words found");
+                        //Debug.WriteLine("  No words found");
                     }
 
                     foreach (Match m in mm) // Don't need to embed this in an else from mm.Count == 0 as the foreach will not happen in that case
                     {
-                        Debug.WriteLine($"  Word found >> {m.Value}");
+                        //Debug.WriteLine($"  Word found >> {m.Value}");
 
                         // Check for found word same as exiting word
                         if (m.Value == p.ThePattern[0].Letters)
                         {
-                            Debug.WriteLine($"  **  Word eliminated - regex word {m.Value} and board word {p.ThePattern[0].Letters} are the same");
+                            //Debug.WriteLine($"  **  Word eliminated - regex word {m.Value} and board word {p.ThePattern[0].Letters} are the same");
                             break; //Exit the foreach (Match m in mm)
                         }
 
@@ -145,11 +145,11 @@ namespace UpwordsAI.AI
 
                         if (!AIHelpers.CheckRack(Rack, tilesNeeded))
                         {
-                            Debug.WriteLine($"  **  Word eliminated - tiles {new string(tilesNeeded)} not achievable from rack {boardRack}");
+                            //Debug.WriteLine($"  **  Word eliminated - tiles {new string(tilesNeeded)} not achievable from rack {boardRack}");
                             break; //Exit the foreach (Match m in mm)
                         }
 
-                        Debug.WriteLine($"  >>  Passes rack test");
+                        //Debug.WriteLine($"  >>  Passes rack test");
 
                         // Not yet checking for covering whole words
 
@@ -165,11 +165,12 @@ namespace UpwordsAI.AI
                                 char[] intersectingWord = p.ThePattern[intersectingPattern].Letters.ToCharArray();
                                 int pos = Array.FindIndex(intersectingWord, x => x == c);
                                 intersectingWord[pos] = foundWord[i];
-                                string lookup = new string(intersectingWord);
+                                string lookup = @"\b" + new string(intersectingWord)+ @"\b";
+
                                 Match mx = Regex.Match(dictionary, lookup);
                                 if (!mx.Success)
                                 {
-                                    Debug.WriteLine($"  **  Fails intersection test");
+                                    //Debug.WriteLine($"  **  Fails intersection test");
                                     break;
                                 }
                                 else
@@ -179,42 +180,35 @@ namespace UpwordsAI.AI
                                     if (c == '!' && p.ThePattern[intersectingPattern].Score == p.ThePattern[intersectingPattern].Letters.Length - 1)
                                     {
                                         scoreForIntersectingWords += (p.ThePattern[intersectingPattern].Score + 1);
-                                        Debug.WriteLine($"  >>  Intersecting word {new string(intersectingWord)} scores flat word bonus");
+                                        //Debug.WriteLine($"  >>  Intersecting word {new string(intersectingWord)} scores flat word bonus");
                                     }
                                     intersectingPattern++;
-                                    Debug.WriteLine($"  >>  Passes intersections test ({mx.Value}). Score of intersecting words now {scoreForIntersectingWords}");
+                                    //Debug.WriteLine($"  >>  Passes intersections test ({mx.Value}). Score of intersecting words now {scoreForIntersectingWords}");
                                 }
                             }
                         }
-                        if (intersectingPattern == 2) Debug.WriteLine($"  >>  No intersections to check");
+                        //if (intersectingPattern == 2) Debug.WriteLine($"  >>  No intersections to check");
 
                         // End of checking intersecting words
 
                         // Now to work out the score
 
-                        //Main word
-                        //if (new string(foundWord) == "ONES")
-                        //{
-                        //    Debug.WriteLine($"ONES: p.ThePattern[1].Letters.Length =  {p.ThePattern[1].Letters.Length}");
-                        //    Debug.WriteLine($"ONES: tilesNeededCount =  {tilesNeededCount}");
-                        //}
-
                         int wordScore = p.ThePattern[1].Score + tilesNeededCount;
                         if (wordScore == p.ThePattern[1].Letters.Length)
                         {
                             wordScore *= 2;
-                            Debug.WriteLine($"  >>  Main word {new string(foundWord)} scores flat word bonus");
+                            //Debug.WriteLine($"  >>  Main word {new string(foundWord)} scores flat word bonus");
                         }
-                        Debug.WriteLine($"  >>  Main word score {wordScore} + intersecting words {scoreForIntersectingWords} = {wordScore + scoreForIntersectingWords}");
+                        //Debug.WriteLine($"  >>  Main word score {wordScore} + intersecting words {scoreForIntersectingWords} = {wordScore + scoreForIntersectingWords}");
                         wordScore += scoreForIntersectingWords;
                         if (wordScore > bestWordScore)
                         {
                             bestWordScore = wordScore;
                             bestWord = new String(foundWord);
-                            Debug.WriteLine($"  >>  {bestWord} gives new best word score {bestWordScore} for this pattern");
+                            //Debug.WriteLine($"  >>  {bestWord} gives new best word score {bestWordScore} for this pattern");
                         }
                     }
-                    Debug.WriteLine("End of pattern");
+                    //Debug.WriteLine("End of pattern");
 
                     if (bestWordScore > bestPatternScore) // Don't use the bestScoringPatternHolder here as it might be null
                     {
@@ -224,12 +218,12 @@ namespace UpwordsAI.AI
                         bestScoringPatternHolder = p;
                         Console.WriteLine($"  >>  New best pattern: {bestScoringPatternHolder.BestScoringWord} gives new best word score {bestScoringPatternHolder.BestScore}");
 
-                        Debug.WriteLine($"  >>  New best pattern: {bestScoringPatternHolder.BestScoringWord} gives new best word score {bestScoringPatternHolder.BestScore}");
+                        //Debug.WriteLine($"  >>  New best pattern: {bestScoringPatternHolder.BestScoringWord} gives new best word score {bestScoringPatternHolder.BestScore}");
                     }
                 }
             }
 
-            Debug.WriteLine("Starting length 2");
+            //Debug.WriteLine("Starting length 2");
             Console.WriteLine("Starting length 2");
 
             for (int i = 1; i < 11; i++) // Working with 1 based arrays with soft edges (i.e. indexes zero and eleven are legal and return empty/zero)
@@ -260,48 +254,36 @@ namespace UpwordsAI.AI
                 }
             }
 
-            //int bestPatternScore = 0;
-
-            //int thresholdAdjustment = 0; // This will be non-zero when we start trying to factor in the quality of the rack remaining after a move
-
-            //Dictionary.Dictionary TheDictionary;
-            //TheDictionary = new Dictionary.Dictionary();
-
-            //string bestWord = "";
-            //int bestWordScore = 0;
-
-
-
             foreach (PatternHolder p in patternHolders)
             {
                 //Debug.WriteLine("New pattern");
 
                 if (p.MaxScore < bestPatternScore - thresholdAdjustment)
                 {
-                    Debug.Print($"  ** Pattern eliminated {p.ThePattern[0].Letters}. Max score is {p.MaxScore} and criterion is {bestPatternScore - thresholdAdjustment}");
+                    //Debug.Print($"  ** Pattern eliminated {p.ThePattern[0].Letters}. Max score is {p.MaxScore} and criterion is {bestPatternScore - thresholdAdjustment}");
                 }
 
                 else
                 {
                     string regexLookup = AIHelpers.GenerateLookup(p.ThePattern, Rack);
-                    Debug.Print("Lookup..." + regexLookup);
+//Console.WriteLine("Lookup..." + regexLookup);
                     //String dictionary = "FADE FACE BAG CAG CAD BAD PARE PARC AD BAGFADE BAGFACE BATED RATED GATED BATEE EPARE CARE AR PA PE TAR";
                     string dictionary = TheDictionary.wordList;
 
                     MatchCollection mm = Regex.Matches(dictionary, regexLookup);
                     if (mm.Count == 0)
                     {
-                        Debug.WriteLine("  No words found");
+                        //Debug.WriteLine("  No words found");
                     }
 
                     foreach (Match m in mm) // Don't need to embed this in an else from mm.Count == 0 as the foreach will not happen in that case
                     {
-                        Debug.WriteLine($"  Word found >> {m.Value}");
+                        //Debug.WriteLine($"  Word found >> {m.Value}");
 
                         // Check for found word same as exiting word
                         if (m.Value == p.ThePattern[0].Letters)
                         {
-                            Debug.WriteLine($"  **  Word eliminated - regex word {m.Value} and board word {p.ThePattern[0].Letters} are the same");
+                            //Debug.WriteLine($"  **  Word eliminated - regex word {m.Value} and board word {p.ThePattern[0].Letters} are the same");
                             break; //Exit the foreach (Match m in mm)
                         }
 
@@ -325,11 +307,11 @@ namespace UpwordsAI.AI
 
                         if (!AIHelpers.CheckRack(Rack, tilesNeeded))
                         {
-                            Debug.WriteLine($"  **  Word eliminated - tiles {new string(tilesNeeded)} not achievable from rack {boardRack}");
+                            //Debug.WriteLine($"  **  Word eliminated - tiles {new string(tilesNeeded)} not achievable from rack {boardRack}");
                             break; //Exit the foreach (Match m in mm)
                         }
 
-                        Debug.WriteLine($"  >>  Passes rack test");
+                        //Debug.WriteLine($"  >>  Passes rack test");
 
                         // Not yet checking for covering whole words
 
@@ -345,11 +327,11 @@ namespace UpwordsAI.AI
                                 char[] intersectingWord = p.ThePattern[intersectingPattern].Letters.ToCharArray();
                                 int pos = Array.FindIndex(intersectingWord, x => x == c);
                                 intersectingWord[pos] = foundWord[i];
-                                string lookup = new string(intersectingWord);
+                                string lookup = @"\b" + new string(intersectingWord) + @"\b";
                                 Match mx = Regex.Match(dictionary, lookup);
                                 if (!mx.Success)
                                 {
-                                    Debug.WriteLine($"  **  Fails intersection test");
+                                    //Debug.WriteLine($"  **  Fails intersection test");
                                     break;
                                 }
                                 else
@@ -359,14 +341,14 @@ namespace UpwordsAI.AI
                                     if (c == '!' && p.ThePattern[intersectingPattern].Score == p.ThePattern[intersectingPattern].Letters.Length - 1)
                                     {
                                         scoreForIntersectingWords += (p.ThePattern[intersectingPattern].Score + 1);
-                                        Debug.WriteLine($"  >>  Intersecting word {new string(intersectingWord)} scores flat word bonus");
+                                        //Debug.WriteLine($"  >>  Intersecting word {new string(intersectingWord)} scores flat word bonus");
                                     }
                                     intersectingPattern++;
-                                    Debug.WriteLine($"  >>  Passes intersections test ({mx.Value}). Score of intersecting words now {scoreForIntersectingWords}");
+                                    //Debug.WriteLine($"  >>  Passes intersections test ({mx.Value}). Score of intersecting words now {scoreForIntersectingWords}");
                                 }
                             }
                         }
-                        if (intersectingPattern == 2) Debug.WriteLine($"  >>  No intersections to check");
+                        //if (intersectingPattern == 2) Debug.WriteLine($"  >>  No intersections to check");
 
                         // End of checking intersecting words
 
@@ -383,18 +365,18 @@ namespace UpwordsAI.AI
                         if (wordScore == p.ThePattern[1].Letters.Length)
                         {
                             wordScore *= 2;
-                            Debug.WriteLine($"  >>  Main word {new string(foundWord)} scores flat word bonus");
+                            //Debug.WriteLine($"  >>  Main word {new string(foundWord)} scores flat word bonus");
                         }
-                        Debug.WriteLine($"  >>  Main word score {wordScore} + intersecting words {scoreForIntersectingWords} = {wordScore + scoreForIntersectingWords}");
+                        //Debug.WriteLine($"  >>  Main word score {wordScore} + intersecting words {scoreForIntersectingWords} = {wordScore + scoreForIntersectingWords}");
                         wordScore += scoreForIntersectingWords;
                         if (wordScore > bestWordScore)
                         {
                             bestWordScore = wordScore;
                             bestWord = new String(foundWord);
-                            Debug.WriteLine($"  >>  {bestWord} gives new best word score {bestWordScore} for this pattern");
+                            //Debug.WriteLine($"  >>  {bestWord} gives new best word score {bestWordScore} for this pattern");
                         }
                     }
-                    Debug.WriteLine("End of pattern");
+                    //Debug.WriteLine("End of pattern");
 
                     if (bestWordScore > bestPatternScore) // Don't use the bestScoringPatternHolder here as it might be null
                     {
@@ -404,7 +386,7 @@ namespace UpwordsAI.AI
                         bestScoringPatternHolder = p;
                         Console.WriteLine($"  >>  New best pattern: {bestScoringPatternHolder.BestScoringWord} gives new best word score {bestScoringPatternHolder.BestScore}");
 
-                        Debug.WriteLine($"  >>  New best pattern: {bestScoringPatternHolder.BestScoringWord} gives new best word score {bestScoringPatternHolder.BestScore}");
+                        //Debug.WriteLine($"  >>  New best pattern: {bestScoringPatternHolder.BestScoringWord} gives new best word score {bestScoringPatternHolder.BestScore}");
                     }
                 }
             }
