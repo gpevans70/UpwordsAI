@@ -106,7 +106,7 @@ namespace UpwordsAI.AI
                     string regexLookup = AIHelpers.GenerateLookup(p.ThePattern,Rack);
 //Console.WriteLine("Lookup..." + regexLookup);
                                     //String dictionary = "FADE FACE BAG CAG CAD BAD PARE PARC AD BAGFADE BAGFACE BATED RATED GATED BATEE EPARE CARE AR PA PE TAR";
-                    string dictionary = TheDictionary.wordList;
+                    string dictionary = TheDictionary.WordList;
 
                     MatchCollection mm = Regex.Matches(dictionary, regexLookup);
                     if (mm.Count == 0)
@@ -268,7 +268,7 @@ namespace UpwordsAI.AI
                     string regexLookup = AIHelpers.GenerateLookup(p.ThePattern, Rack);
 //Console.WriteLine("Lookup..." + regexLookup);
                     //String dictionary = "FADE FACE BAG CAG CAD BAD PARE PARC AD BAGFADE BAGFACE BATED RATED GATED BATEE EPARE CARE AR PA PE TAR";
-                    string dictionary = TheDictionary.wordList;
+                    string dictionary = TheDictionary.WordList;
 
                     MatchCollection mm = Regex.Matches(dictionary, regexLookup);
                     if (mm.Count == 0)
