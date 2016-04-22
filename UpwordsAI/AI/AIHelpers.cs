@@ -65,8 +65,6 @@ namespace UpwordsAI.AI
                     boardLettersCount=-99; // As boardLettersCount > 1 is the test for an adjustment, this will ensure that there is not adjustment
                     break;                 // No need to keep counting                             
                 }
-
-
             }
             if (boardLettersCount > 1) // If there's more than one existing board letter, then there's a word we have covered in computing maxScore so far
             {
@@ -84,7 +82,7 @@ namespace UpwordsAI.AI
             return maxScore;
         }
 
-        public static bool CheckRack(char[] Rack, char[] TilesNeeded)
+        public static bool CheckRack(char[] Rack, char[] TilesNeeded, out char[] tilesLeftOnRack)
         {
             char[] disposableRack = new char[Rack.Length];
             Rack.CopyTo(disposableRack, 0);
@@ -94,6 +92,7 @@ namespace UpwordsAI.AI
                 int pos = Array.FindIndex(disposableRack, x => x == c);
                 if (pos < 0)
                 {
+                    tilesLeftOnRack = null;
                     return false;
                 }
                 else
@@ -101,6 +100,10 @@ namespace UpwordsAI.AI
                     disposableRack[pos] = ' ';
                 }
             }
+            var tiles =     from c in disposableRack
+                            where c != ' '
+                            select c;
+            tilesLeftOnRack = tiles.ToArray();
             return true;
         }
 
@@ -315,7 +318,7 @@ namespace UpwordsAI.AI
                         }
                         ThePatternHolder.ThePattern.Add(new Pattern(buildPattern, score));
                     }
-                 }
+                }
             }
             else
             {
@@ -345,8 +348,6 @@ namespace UpwordsAI.AI
                     }
                 }
             }
-
-
             ThePatternHolder.TheLength = WorkingLength;
             ThePatternHolder.TheLocationX = WorkingX;
             ThePatternHolder.TheLocationY = WorkingY;
@@ -357,7 +358,7 @@ namespace UpwordsAI.AI
         {
             char[] deduplicatedRack = new char[TheRack.Length];
 
-            // Generate the dedupliated rack and trim to only used positions
+            // Generate the deduplicated rack and trim to only used positions
             foreach (char c in TheRack) 
             {
                 int pos = Array.FindIndex(deduplicatedRack, x => x == c);

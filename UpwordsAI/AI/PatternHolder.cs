@@ -21,5 +21,6 @@ namespace UpwordsAI.AI
         internal int MaxScore { get; set; }
         internal string BestScoringWord { get; set; }
         internal int BestScore { get; set; }
+        internal string TilesLeftOnRack { get; set; }
     }
 }
