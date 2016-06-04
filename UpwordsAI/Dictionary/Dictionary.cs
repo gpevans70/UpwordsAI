@@ -14,7 +14,7 @@ namespace UpwordsAI.Dictionary
 
         public Dictionary()
         {
-             wordList = File.ReadAllText("C:/Users/Public/Documents/words.txt");
+             wordList = File.ReadAllText("C:/Users/Public/Documents/Upwords/words.txt");
 
         }
 

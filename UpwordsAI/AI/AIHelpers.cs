@@ -381,14 +381,14 @@ namespace UpwordsAI.AI
                 }
             }
 
-            string result = @"\b";
+            string result = "";
             for (int i = 0; i < ThePattern[1].Letters.Length; i++)
             {
-                if (ThePattern[1].Letters[i] >= 'A' && ThePattern[1].Letters[i] <= 'Z')
+                if (ThePattern[1].Letters[i] >= 'A' && ThePattern[1].Letters[i] <= 'Z') // If it's a letter in pattern 1, add it to the pattern
                 {
                     result += ThePattern[1].Letters[i];
                 }
-                else // It's not a letter
+                else // If it's not a letter in pattern 1, then it could be a rack letter of (if applicable) a board letter
                 {
                     result += RackString;
                     if (ThePattern[0].Letters[i] >= 'A' && ThePattern[1].Letters[i] <= 'Z' && maxRackLetters > 1)
@@ -398,8 +398,7 @@ namespace UpwordsAI.AI
                     result += "]";
                 }
             }
-            result += @"\b";
-            return result;
+            return @"\b" + result + @"\b";
         }
 
         internal static int CountAdjacenciesXBefore(char [,] position, int X, int Y)

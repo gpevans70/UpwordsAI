@@ -49,17 +49,17 @@ namespace UpwordsAI.AI
             char[] Rack = boardRack.ToCharArray();
             Array.Sort(Rack);
 
-            CalculateOneLength(ref bestScoringPatternHolder, ref bestPatternScore, thresholdAdjustment, TheDictionary, ref bestWord, /*ref bestWordScore,*/ 1, softTiles, softHeights, Rack);
+            CalculateOneLength(ref bestScoringPatternHolder, ref bestPatternScore, thresholdAdjustment, TheDictionary, ref bestWord, 1, softTiles, softHeights, Rack);
 
-            CalculateOneLength(ref bestScoringPatternHolder, ref bestPatternScore, thresholdAdjustment, TheDictionary, ref bestWord, /*ref bestWordScore,*/ 2, softTiles, softHeights, Rack);
+            CalculateOneLength(ref bestScoringPatternHolder, ref bestPatternScore, thresholdAdjustment, TheDictionary, ref bestWord, 2, softTiles, softHeights, Rack);
 
-            CalculateOneLength(ref bestScoringPatternHolder, ref bestPatternScore, thresholdAdjustment, TheDictionary, ref bestWord, /*ref bestWordScore,*/ 3, softTiles, softHeights, Rack);
+            CalculateOneLength(ref bestScoringPatternHolder, ref bestPatternScore, thresholdAdjustment, TheDictionary, ref bestWord, 3, softTiles, softHeights, Rack);
 
-            CalculateOneLength(ref bestScoringPatternHolder, ref bestPatternScore, thresholdAdjustment, TheDictionary, ref bestWord, /*ref bestWordScore,*/ 4, softTiles, softHeights, Rack);
+            CalculateOneLength(ref bestScoringPatternHolder, ref bestPatternScore, thresholdAdjustment, TheDictionary, ref bestWord, 4, softTiles, softHeights, Rack);
 
-            CalculateOneLength(ref bestScoringPatternHolder, ref bestPatternScore, thresholdAdjustment, TheDictionary, ref bestWord, /*ref bestWordScore,*/ 5, softTiles, softHeights, Rack);
+            CalculateOneLength(ref bestScoringPatternHolder, ref bestPatternScore, thresholdAdjustment, TheDictionary, ref bestWord, 5, softTiles, softHeights, Rack);
 
-            CalculateOneLength(ref bestScoringPatternHolder, ref bestPatternScore, thresholdAdjustment, TheDictionary, ref bestWord, /*ref bestWordScore,*/ 6, softTiles, softHeights, Rack);
+            CalculateOneLength(ref bestScoringPatternHolder, ref bestPatternScore, thresholdAdjustment, TheDictionary, ref bestWord, 6, softTiles, softHeights, Rack);
 
             PatternHolder ph = bestScoringPatternHolder;
 
