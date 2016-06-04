@@ -225,8 +225,9 @@ namespace UpwordsAI.Tests.AI
             char[] _startrack = _rack;
 
             char[] _tilesneeded = new char[] { 'A', 'B', 'C' };
+            char[] _tilesleft = new char[0];
 
-            AIHelpers.CheckRack(_rack, _tilesneeded);
+            AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft);
 
             Assert.AreEqual(_startrack, _rack);
         }
@@ -235,172 +236,178 @@ namespace UpwordsAI.Tests.AI
         public void AssertThat_RackHandlesOKSingles()
         {
             char[] _rack = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G' };
+            char[] _tilesleft = new char[0];
 
             var _tilesneeded = new char[] { 'A' };
-            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'B' };
-            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'C' };
-            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'D' };
-            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'E' };
-            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'F' };
-            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'G' };
-            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
         }
 
         [TestMethod]
         public void AssertThat_RackHandlesNotOKSingles()
         {
             char[] _rack = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G' };
+            char[] _tilesleft = new char[0];
 
             var _tilesneeded = new char[] { 'H' };
-            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'T' };
-            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'Z' };
-            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _rack = new char[] { 'T', 'U', 'W', 'V', 'X', 'Y', 'Z' };
 
             _tilesneeded = new char[] { 'A' };
-            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'M' };
-            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'S' };
-            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _rack = new char[] { 'B', 'F', 'J', 'N', 'Q', 'T', 'Y' };
 
             _tilesneeded = new char[] { 'A' };
-            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'M' };
-            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'Z' };
-            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
         }
 
         [TestMethod]
         public void AssertThat_RackHandlesOKDoubles()
         {
             char[] _rack = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G' };
+            char[] _tilesleft = new char[0];
 
             var _tilesneeded = new char[] { 'A', 'B' };
-            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'B', 'A' };
-            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'A', 'D' };
-            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'D', 'A' };
-            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'A', 'B' };
-            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'B', 'F' };
-            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'F', 'B' };
-            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'C', 'G' };
-            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'G', 'C' };
-            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'A', 'G' };
-            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'G', 'A' };
-            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
         }
 
         [TestMethod]
         public void AssertThat_RackHandlesNotOKDoubles()
         {
             char[] _rack = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G' };
+            char[] _tilesleft = new char[0];
 
             var _tilesneeded = new char[] { 'K', 'B' };
-            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'B', 'K' };
-            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'S', 'G' };
-            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'G', 'X' };
-            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'A', 'A' };
-            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'E', 'E' };
-            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'G', 'G' };
-            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
         }
 
         [TestMethod]
         public void AssertThat_RackHandlesOKLongerLengths()
         {
             char[] _rack = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G' };
+            char[] _tilesleft = new char[0];
 
             var _tilesneeded = new char[] { 'A', 'B', 'C' };
-            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'B', 'A', 'F' };
-            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'A', 'D' , 'F', 'C' };
-            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'D', 'A', 'G', 'E', 'F' };
-            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'G', 'C' , 'F', 'E', 'D', 'B' };
-            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'G', 'C', 'F', 'E', 'D', 'A', 'B' };
-            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(true, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
         }
 
         [TestMethod]
         public void AssertThat_RackHandlesNotOKLongerLengths()
         {
             char[] _rack = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G' };
+            char[] _tilesleft = new char[0];
 
             var _tilesneeded = new char[] { 'B', 'B' };
-            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'B', 'K', 'A' };
-            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'B', 'C', 'F', 'S', 'G' };
-            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
 
             _tilesneeded = new char[] { 'B', 'C', 'F', 'G', 'B', 'A' };
-            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded));
+            Assert.AreEqual(false, AIHelpers.CheckRack(_rack, _tilesneeded, out _tilesleft));
         }
 
         [TestMethod]
