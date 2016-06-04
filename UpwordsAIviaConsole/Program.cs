@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 using System.IO;
 using UpwordsAI.AI;
 
@@ -13,15 +10,24 @@ namespace UpwordsAIviaConsole
     {
         static void Main(string[] args)
         {
-            AIWorker TheAIWorker = new AIWorker();
+            if (args.Length != 2)
+            {
+                Console.WriteLine("Incorrect number of arguments!");
+                Console.WriteLine("Call with 'RACKTILES path\\to\\board.txt'");
+                Console.WriteLine("Press any key to exit");
+                Console.Read();
 
-            string boardRack;
+                return;
+            }
+
+            AIWorker aiWorker = new AIWorker();
+
             string[,] boardTiles = new string[10, 10];
             int[,] boardHeights = new int[10, 10];
             
-            boardRack = args[0].Trim().Replace("Qu","Q").ToUpper();            
+            var boardRack = args[0].Trim().Replace("Qu","Q").ToUpper();            
 
-            string[] fileContents = File.ReadAllLines("C:/Users/Public/Documents/board.txt");
+            string[] fileContents = File.ReadAllLines(args[1]);
 
             int lineCounter = 0;
             while (lineCounter<10)
@@ -38,7 +44,7 @@ namespace UpwordsAIviaConsole
                 }
                 lineCounter++;
             }
-;
+
             lineCounter = 0;
             while (lineCounter < 10)
             {
@@ -115,14 +121,14 @@ namespace UpwordsAIviaConsole
                 Console.WriteLine($"My tiles are: {boardRack}");
                 Console.WriteLine("");
                 Console.WriteLine("Press X followed by ENTER key to eXit or the ENTER key to start the AI");
-                string UserInput = Console.ReadLine();
+                string userInput = Console.ReadLine();
 
-                if (UserInput != "X")
+                if (userInput != "X")
                 {
-                    string Move = TheAIWorker.FindMove(boardRack, boardTiles, boardHeights); // These are zero based arrays
+                    string move = aiWorker.FindMove(boardRack, boardTiles, boardHeights); // These are zero based arrays
 
                     Console.WriteLine("");
-                    Console.WriteLine(""); Console.WriteLine($"I play tiles {Move}");
+                    Console.WriteLine(""); Console.WriteLine($"I play tiles {move}");
                     Console.WriteLine("");
                     Console.WriteLine("  +------+------+------+------+------+------+------+------+------+------+");
 
